@@ -12,22 +12,25 @@
 </head>
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fa-solid fa-bars"></i>
-        </label>
         <label class="logo">My Portfolio</label>
-        <ul>
+        <div class="nav-items">
+            <ul>
             <li><a href="#" class="nav-item" class="active">Home</a></li>
             <li><a href="#" class="nav-item">About</a></li>
             <li><a href="#" class="nav-item">Services</a></li>
             <li><a href="#" class="nav-item">Contact</a></li>
             <li><a href="#" class="nav-item">Feedback</a></li>
-        </ul>
-        <label class="theme-switch">
+            </ul>
+            <label class="theme-switch">
             <input type="checkbox" id="theme-toggle">
             <span class="slider"></span>
         </label>
+        <div style="width: 2px; background: black; margin: 0 10px;"></div>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fa-solid fa-bars"></i>
+        </label>
+        </div>
     </nav>
 
     <!-- Greeting -->
@@ -54,35 +57,54 @@
     <div class="category">
         <h3>Flutter</h3>
         <div class="project-card">
-            <h4>Flash Cards</h4>
+            <div class="title-icon">
+                <img src="images/flashcards.png" alt="flashcards">
+                <h4>Flash Cards</h4>
+            </div>
             <p>App for learning languages with flash cards</p>
             <div class="download-buttons">
-                <a href="programs/flashcards.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="programs/flashcards/flashcards.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
                 <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="programs/flashcards/flashcards_linux.zip" class="button"><i class="fa-brands fa-linux"></i> Download for Linux</a>
+                <a href="https://aquamarine-starlight-161ac6.netlify.app" class="button" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Web Version</a>
+                <!-- rel="noopener noreferrer" -->
             </div>
         </div>
         <div class="project-card">
-            <h4>Task Scheduler</h4>
+            <div class="title-icon">
+                <img src="images/task_scheduler.png" alt="task_scheduler">
+                <h4>Task Scheduler</h4>
+            </div>
             <p>App for scheduling tasks</p>
             <div class="download-buttons">
-                <a href="programs/task_scheduler.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
-                <a href="programs/task_scheduler.zip" download class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="programs/task_scheduler/task_scheduler.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="programs/task_scheduler/task_scheduler_windows.zip" download class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="programs/task_scheduler/task_scheduler_linux.zip" download class="button"><i class="fa-brands fa-linux"></i> Download for Linux</a>
+                <a href="https://spiffy-kleicha-26b0ee.netlify.app" download class="button" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Web Version</a>
             </div>
         </div>
         <div class="project-card">
-            <h4>Cutie Timer</h4>
+            <div class="title-icon">
+                <img src="images/cutie_timer.png" alt="cutie_timer">
+                <h4>Cutie Timer</h4>
+            </div>
             <p>Just a cute timer</p>
             <div class="download-buttons">
                 <a href="programs/cutie_timer.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</i></a>
                 <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="programs/cutie_timer/cutie_timer_linux.zip" class="button"><i class="fa-brands fa-linux"></i> Download for Linux</a>
+                <a href="https://marvelous-madeleine-9ff939.netlify.app" class="button" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-globe"></i> Web Version</a>
             </div>
         </div>
         <div class="project-card">
-            <h4>Notes</h4>
+            <div class="title-icon">
+                <img src="images/notes.png" alt="notes">
+                <h4>Notes</h4>
+            </div>
             <p>App for writing notes</p>
             <div class="download-buttons">
-                <a href="#" class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
-                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-windows"></i> Download for Windows</a>
             </div>
         </div>
     </div>
@@ -91,10 +113,10 @@
         <h3>JUCE</h3>
         <div class="project-card">
             <h4>Kobleton</h4>
-            <p>Digital Audio Workstation made with JUCE/C++.</p>
+            <p>Digital Audio Workstation made with JUCE/C++</p>
             <div class="download-buttons">
-                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
-                <a href="#" class="button">Download for macOS</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-apple"></i> Download for macOS</a>
             </div>
         </div>
     </div>
@@ -105,31 +127,40 @@
             <h4>Pixel Adventure</h4>
             <p>Small platformer game made in Godot</p>
             <div class="download-buttons">
-                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
-                <a href="#" class="button">Download for Linux</a>
-                <a href="#" class="button"><i class="fa-brands fa-apple"></i> Download for macOS</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-windows"></i> Download for Windows</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-linux"></i> Download for Linux</a>
+                <a href="#" class="button openModal"><i class="fa-brands fa-apple"></i> Download for macOS</a>
             </div>
         </div>
     </div>
 </section>
 
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>This app isn't finished yet(</h2>
+    <p>I am sorry for that (｡•́︿•̀｡)</p>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer class="footer">
     <h2>You can also find me here</h2>
         <div class="social-networks">
-            <div class="social-network">
-            <i class="fa-brands fa-github"></i>
+            <a href="https://github.com/VoidCorew" class="social-network" target="_blank" rel="noopener noreferrer">    
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://discord.com/users/1285689446015959092" class="social-network" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-discord"></i>
+            </a>
+            <a href="https://t.me/cxzerr" class="social-network" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-telegram"></i>
+            </a>
+            <a href="https://youtube.com/@vinex010?si=lPmGMXha3lpw5u_y" class="social-network" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
         </div>
-        <div class="social-network">
-            <i class="fa-brands fa-discord"></i>
-        </div>
-        <div class="social-network">
-            <i class="fa-brands fa-telegram"></i>
-        </div>
-        <div class="social-network">
-            <i class="fa-brands fa-youtube"></i>
-        </div>
-    </div>
 </footer>
 
 <script src="script.js"></script>
