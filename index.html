@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Jura:wght@300..700&family=Nata+Sans:wght@100..900&family=Pixelify+Sans:wght@400..700&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8bdf8c69c6.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -21,6 +24,10 @@
             <li><a href="#" class="nav-item">Contact</a></li>
             <li><a href="#" class="nav-item">Feedback</a></li>
         </ul>
+        <label class="theme-switch">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider"></span>
+        </label>
     </nav>
 
     <!-- Greeting -->
@@ -50,32 +57,32 @@
             <h4>Flash Cards</h4>
             <p>App for learning languages with flash cards</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Android</a>
-                <a href="#" class="button">Download for Windows</a>
+                <a href="#" class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
             </div>
         </div>
         <div class="project-card">
             <h4>Task Scheduler</h4>
             <p>App for scheduling tasks</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Android</a>
-                <a href="#" class="button">Download for Windows</a>
+                <a href="programs/task_scheduler.apk" download class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="programs/task_scheduler.zip" download class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
             </div>
         </div>
         <div class="project-card">
             <h4>Cutie Timer</h4>
             <p>Just a cute timer</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Android</a>
-                <a href="#" class="button">Download for Windows</a>
+                <a href="#" class="button"><i class="fa-brands fa-android"></i> Download for Android</i></a>
+                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
             </div>
         </div>
         <div class="project-card">
             <h4>Notes</h4>
             <p>App for writing notes</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Android</a>
-                <a href="#" class="button">Download for Windows</a>
+                <a href="#" class="button"><i class="fa-brands fa-android"></i> Download for Android</a>
+                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
             </div>
         </div>
     </div>
@@ -86,7 +93,7 @@
             <h4>Kobleton</h4>
             <p>Digital Audio Workstation made with JUCE/C++.</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Windows</a>
+                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
                 <a href="#" class="button">Download for macOS</a>
             </div>
         </div>
@@ -98,13 +105,33 @@
             <h4>Pixel Adventure</h4>
             <p>Small platformer game made in Godot</p>
             <div class="download-buttons">
-                <a href="#" class="button">Download for Windows</a>
+                <a href="#" class="button"><i class="fa-brands fa-windows"></i> Download for Windows</a>
                 <a href="#" class="button">Download for Linux</a>
-                <a href="#" class="button">Download for macOS</a>
+                <a href="#" class="button"><i class="fa-brands fa-apple"></i> Download for macOS</a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Footer -->
+<footer class="footer">
+    <h2>You can also find me here</h2>
+        <div class="social-networks">
+            <div class="social-network">
+            <i class="fa-brands fa-github"></i>
+        </div>
+        <div class="social-network">
+            <i class="fa-brands fa-discord"></i>
+        </div>
+        <div class="social-network">
+            <i class="fa-brands fa-telegram"></i>
+        </div>
+        <div class="social-network">
+            <i class="fa-brands fa-youtube"></i>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -6,13 +6,29 @@
     box-sizing: border-box;
 }
 
-@font-face {
+/* @font-face {
     font-family: 'Nata';
     src: url('fonts/NataSans-Regular.ttf') format('tttruetype');
 }
 
+@font-face {
+    font-family: 'Pixel';
+    src: url('fonts/PixelifySans-Regular.ttf') format('tttruetype');
+}
+
+@font-face {
+    font-family: 'Jet';
+    src: url('fonts/JetBrainsMono-Regular.ttf') format('tttruetype');
+} */
+
 body {
-    font-family: 'Nata', Arial, sans-serif;
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-theme {
+    background-color: #000;
+    color: #fff;
 }
 
 nav {
@@ -21,7 +37,12 @@ nav {
     width: 100%;
 }
 
+body.dark-theme nav {
+    border-bottom: 1px solid #fff;
+}
+
 label.logo {
+    font-family: 'Pixelify Sans';
     font-size: 35px;
     line-height: 80px;
     padding: 0 100px;
@@ -40,6 +61,7 @@ nav ul li {
 }
 
 nav ul li a {
+    font-family: 'Pixelify Sans';
     color: #000;
     font-size: 17px;
     padding: 7px 13px;
@@ -47,8 +69,17 @@ nav ul li a {
     text-transform: uppercase;
 }
 
+body.dark-theme nav ul li a {
+    color: #fff;
+}
+
+body.dark-theme .nav-item.active, .nav-item:hover {
+    color: #000;
+    background: #fff;
+}
+
 .nav-item.active, .nav-item:hover {
-    color: white;
+    color: #fff;
     background: #000;
     transition: .5s;
 }
@@ -73,12 +104,18 @@ nav ul li a {
     border: 1px solid #000;
 }
 
+body.dark-theme .greeting-section {
+    border: 1px solid #fff;
+}
+
 .greeting {
+    font-family: 'Pixelify Sans';
     font-size: 40px;
     font-weight: bold;
 }
 
 .about-me {
+    font-family: 'Pixelify Sans';
     margin: 20px 0px;
 }
 
@@ -88,6 +125,7 @@ nav ul li a {
 }
 
 .contact-email {
+    font-family: 'Jetbrains Mono';
     border: 1px solid #000;
     padding: 10px 16px;
     font-size: 20px;
@@ -98,12 +136,20 @@ nav ul li a {
     display: inline-block;
 }
 
+body.dark-theme .contact-email {
+    border: 1px solid #fff;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 5px 5px 0 #fff;
+}
+
 /* .contact-email:focus {
     box-shadow: none;
     transform: translate(5px, 5px);
 } */
 
-.button {
+/* .button {
+    font-family: 'Jetbrains Mono';
     display: inline-block;
     border: 1px solid #000;
     padding: 10px 16px;
@@ -113,6 +159,68 @@ nav ul li a {
     outline: none;
     box-shadow: 5px 5px 0 #000;
     transition: all .3s ease-in-out;
+} */
+
+.button {
+    font-family: 'Jetbrains Mono';
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 10px 16px;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 5px 5px 0 #000;
+    transition: all .3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: black;
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.button:hover::before {
+    left: 0;
+}
+
+body.dark-theme .button {
+    border: 1px solid #fff;
+    color: #fff;
+    box-shadow: 5px 5px 0 #fff;
+}
+
+.button:hover {
+    color: white;
+}
+
+body.dark-theme .button:hover {
+    color: #000;
+}
+
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: black;
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+body.dark-theme .button::before {
+    background: #fff;
+}
+
+body.dark-theme .button:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
 }
 
 .button:active {
@@ -159,6 +267,14 @@ nav ul li a {
     #check:checked ~ ul {
         left: 0;
     }
+    .contact {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .download-buttons {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 }
 
 /* Projects */
@@ -168,7 +284,12 @@ nav ul li a {
     border: 1px solid #000;
 }
 
+body.dark-theme .projects-section {
+    border: 1px solid #fff;
+}
+
 .projects-section h2 {
+    font-family: 'Pixelify Sans';
     font-size: 40px;
     margin-bottom: 20px;
 }
@@ -178,6 +299,7 @@ nav ul li a {
 }
 
 .category h3 {
+    font-family: 'Pixelify Sans';
     font-size: 28px;
     margin-bottom: 10px;
 }
@@ -190,23 +312,122 @@ nav ul li a {
 }
 
 .project-card h4 {
+    font-family: 'Jetbrains Mono';
     font-size: 25px;
     margin-bottom: 10px;
 }
 
 .project-card p {
+    font-family: 'Jetbrains Mono';
     font-size: 18px;
     font-style: italic;
 }
 
 .download-buttons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     margin-top: 10px;
 }
 
-.download-buttons .button {
-    font-size: 18px;
-    padding: 8px 14px;
+/* Theme switcher */
+/* Контейнер переключателя */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+/* Прячем стандартный checkbox */
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Ползунок */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 25px;
+}
+
+/* Кружок внутри */
+.slider:before {
+  position: absolute;
+  content: "🌞";
+  height: 21px;
+  width: 21px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  text-align: center;
+  line-height: 21px;
+  font-size: 14px;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Активное состояние */
+input:checked + .slider {
+  background-color: #666;
+}
+
+input:checked + .slider:before {
+  transform: translateX(25px);
+  content: "🌙";
+}
+
+.footer {
+    border-top: 1px solid #000;
+    padding: 20px;
+}
+
+body.dark-theme .footer {
+    border-top: 1px solid #fff;
+}
+
+.footer h2 {
+    font-family: 'Pixelify Sans';
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.social-networks {
+    display: flex;
+    gap: 15px;
+}
+
+.social-network {
+    display: inline-block;
+    padding: 15px;
+    border: 1px solid #000;
+    box-shadow: 5px 5px 0 #000;
+    transition: all .4s;
+}
+
+body.dark-theme .social-network {
+    border: 1px solid #fff;
+    box-shadow: 5px 5px 0 #fff;
+}
+
+.social-network:hover {
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+body.dark-theme .social-network:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.social-network i {
+    font-size: 30px;
 }
