@@ -1,22 +1,25 @@
-const toggle = document.getElementById('theme-toggle');
+const themeToggleBtn = document.getElementById('theme-toggle');
 
-// Проверяем сохранённую тему
 if (localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark-theme');
-  toggle.checked = true;
+  // toggle.checked = true;
 }
 
-// Обработчик клика
-toggle.addEventListener('change', () => {
+// toggle.addEventListener('change', () => {
+//   document.body.classList.toggle('dark-theme');
+//   if (document.body.classList.contains('dark-theme')) {
+//     localStorage.setItem('theme', 'dark');
+//   } else {
+//     localStorage.setItem('theme', 'light');
+//   }
+// });
+
+themeToggleBtn.addEventListener('click', () => {
   document.body.classList.toggle('dark-theme');
-  if (document.body.classList.contains('dark-theme')) {
-    localStorage.setItem('theme', 'dark');
-  } else {
-    localStorage.setItem('theme', 'light');
-  }
+  const isDark = document.body.classList.contains('dark-theme');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
-// модальное окно
 const modal = document.getElementById("modal");
 const openBtns = document.querySelectorAll(".openModal");
 const closeBtn = modal.querySelector(".close");
@@ -37,7 +40,6 @@ closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-// Закрытие при клике вне окна
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal.style.display = "none";
@@ -46,86 +48,195 @@ window.addEventListener("click", (e) => {
 
 
 // ------------------------------------------------------
-// Лайтбокс для скриншотов
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
-const lightboxCaption = document.querySelector('.caption');
-const closeLightbox = document.querySelector('.close-lightbox');
-const screenshots = document.querySelectorAll('.screenshots img');
+const closeLightbox = lightbox.querySelector('.close-lightbox');
+const prevBtn = lightbox.querySelector('.prev');
+const nextBtn = lightbox.querySelector('.next');
 
-screenshots.forEach(img => {
-  img.addEventListener('click', () => {
-    lightbox.style.display = 'block';
-    lightboxImg.src = img.src;
-    lightboxCaption.textContent = img.alt || 'Скриншот приложения';
-  });
-});
-
-closeLightbox.addEventListener('click', () => {
-  lightbox.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-  if (e.target === lightbox) {
-    lightbox.style.display = 'none';
-  }
-});
-
-// -----------------------------------------------------------
-// Обновите JavaScript для слайдера
 let currentImageIndex = 0;
-const imagesArray = [];
+let currentImages = [];
 
-// Инициализация слайдера
-document.querySelectorAll('.screenshots img').forEach((img, index) => {
-  imagesArray.push({
-    src: img.src,
-    alt: img.alt || 'Скриншот приложения'
-  });
+document.querySelectorAll('.project-card').forEach(card => {
+  const screenshots = card.querySelectorAll('.screenshots img');
 
-  img.addEventListener('click', (index) => {
-    currentImageIndex = index;
-    openLightbox();
-  });
+  if (screenshots.length > 0) {
+    screenshots.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentImages = Array.from(screenshots).map(img => ({
+          src: img.src,
+          alt: img.alt || 'Application Screenshot'
+        }));
+
+        // Устанавливаем текущий индекс
+        currentImageIndex = index;
+
+        // Открываем лайтбокс
+        openLightbox();
+      });
+    });
+  }
 });
 
 function openLightbox() {
   lightbox.style.display = 'block';
   updateLightboxImage();
+  document.body.style.overflow = 'hidden'; // Блокируем скролл страницы
 }
 
 function updateLightboxImage() {
-  lightboxImg.src = imagesArray[currentImageIndex].src;
-  lightboxCaption.textContent = imagesArray[currentImageIndex].alt;
+  if (currentImages.length > 0 && currentImages[currentImageIndex]) {
+    lightboxImg.src = currentImages[currentImageIndex].src;
+    lightboxImg.alt = currentImages[currentImageIndex].alt;
+
+    const caption = document.querySelector('.caption');
+    if (caption) {
+      caption.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+    }
+  }
 }
 
-// Навигация
+function closeLightboxFunc() {
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto'; // Восстанавливаем скролл
+  currentImages = []; // Очищаем массив
+}
+
+closeLightbox.addEventListener('click', closeLightboxFunc);
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox || e.target.classList.contains('close-lightbox')) {
+    closeLightboxFunc();
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (currentImages.length > 0) {
+    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+    updateLightboxImage();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentImages.length > 0) {
+    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxImage();
+  }
+});
+
 document.addEventListener('keydown', (e) => {
   if (lightbox.style.display === 'block') {
-    if (e.key === 'ArrowLeft') {
-      currentImageIndex = (currentImageIndex - 1 + imagesArray.length) % imagesArray.length;
-      updateLightboxImage();
-    } else if (e.key === 'ArrowRight') {
-      currentImageIndex = (currentImageIndex + 1) % imagesArray.length;
-      updateLightboxImage();
-    } else if (e.key === 'Escape') {
-      lightbox.style.display = 'none';
+    e.preventDefault(); // Предотвращаем прокрутку страницы стрелками
+
+    switch (e.key) {
+      case 'Escape':
+        closeLightboxFunc();
+        break;
+      case 'ArrowRight':
+      case 'Right':
+        nextBtn.click();
+        break;
+      case 'ArrowLeft':
+      case 'Left':
+        prevBtn.click();
+        break;
     }
   }
 });
 
-// --------------------------------------------------- prev ---------------------------------------------------
-// Lightbox navigation
-document.querySelector('.next').addEventListener('click', function () {
-  // Логика перехода к следующему изображению
-  // Например:
-  currentImageIndex = (currentImageIndex + 1) % images.length;
-  updateLightboxImage();
+let touchStartX = 0;
+let touchEndX = 0;
+
+lightbox.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
 });
 
-document.querySelector('.prev').addEventListener('click', function () {
-  // Логика перехода к предыдущему изображению
-  // Например:
-  currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-  updateLightboxImage();
+lightbox.addEventListener('touchend', (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 50;
+
+  if (touchEndX < touchStartX - swipeThreshold) {
+    // Свайп влево = следующее фото
+    nextBtn.click();
+  }
+
+  if (touchEndX > touchStartX + swipeThreshold) {
+    // Свайп вправо = предыдущее фото
+    prevBtn.click();
+  }
+}
+
+console.log('Lightbox элемент:', lightbox);
+console.log('Lightbox изображение:', lightboxImg);
+console.log('Скриншоты найдены:', document.querySelectorAll('.screenshots img').length);
+
+// Burger
+
+const burger = document.getElementById('burger');
+const navMenu = document.querySelector('.nav-items ul');
+const navItems = document.querySelectorAll('.nav-item');
+const body = document.body;
+
+// Создаём оверлей для мобильного меню
+const navOverlay = document.createElement('div');
+navOverlay.className = 'nav-overlay';
+document.body.appendChild(navOverlay);
+
+// Функция открытия/закрытия меню
+function toggleMenu() {
+  burger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+  navOverlay.classList.toggle('active');
+  body.style.overflow = body.style.overflow === 'hidden' ? '' : 'hidden';
+}
+
+// Открытие/закрытие по клику на бургер
+burger.addEventListener('click', toggleMenu);
+
+// Закрытие по клику на оверлей
+navOverlay.addEventListener('click', toggleMenu);
+
+// Закрытие по клику на пункт меню
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      toggleMenu();
+    }
+
+    // Плавный скролл к секции
+    const targetId = item.getAttribute('href');
+    const targetSection = document.querySelector(targetId);
+
+    if (targetSection) {
+      window.scrollTo({
+        top: targetSection.offsetTop - 80,
+        behavior: 'smooth'
+      });
+
+      // Обновляем активный пункт
+      navItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+    }
+  });
+});
+
+// Закрытие меню при ресайзе окна
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    burger.classList.remove('active');
+    navMenu.classList.remove('active');
+    navOverlay.classList.remove('active');
+    body.style.overflow = '';
+  }
+});
+
+// Закрытие меню при нажатии Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && burger.classList.contains('active')) {
+    toggleMenu();
+  }
 });
